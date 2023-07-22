@@ -46,4 +46,7 @@ if ($username_exists == 0 && $phone_exists == 0) {
 }
 
 echo json_encode($response);
+
+//    API:vSIGNUP:
+//    http://localhost/Google-Classroom-Clone-BE/signup.php  
 ?>
