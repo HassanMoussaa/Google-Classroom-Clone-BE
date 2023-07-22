@@ -32,6 +32,6 @@ if ($name != "" && $user_exists > 0){
 
 echo json_encode($response);
 
-//    API:vSIGNUP:
+//    API:ADD_CLASS:
 //    http://localhost/Google-Classroom-Clone-BE/add_class.php  
 ?>
