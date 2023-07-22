@@ -1,13 +1,21 @@
 <?php
 include('connection.php');
-$_POST = json_decode(file_get_contents('php://input'), true);
+// $_POST = json_decode(file_get_contents('php://input'), true);
 
-$email = $_POST['email'];
+$input = $_POST['input'];
 $password = $_POST['password'];
-$phone_number=$_POST['phone_number']
 
-$mysqli  = $mysqli->prepare('select id,email,password,first_name,last_name,user_type_id,image_path,phone_number from users where email=? OR phone_number=?');
-$mysqli ->bind_param('ss', $email,$phone_number);
+
+// Check if the input looks like a phone number
+if (preg_match('/^[0-9]+$/', $input)) {
+    // input is a phone number
+    $query = $mysqli->prepare('SELECT id, email, password, first_name, last_name, user_type_id, image_path, phone_number FROM users WHERE phone_number=?');
+    $query->bind_param('s', $input);
+} else {
+    // input is an email
+    $query = $mysqli->prepare('SELECT id, email, password, first_name, last_name, user_type_id, image_path, phone_number FROM users WHERE email=?');
+    $query->bind_param('s', $input);
+}
 $query->execute();
 
 $query->store_result();
@@ -23,7 +31,7 @@ if ($num_rows == 0) {
         $response['first_name'] = $first_name;
         $response['last_name'] = $last_name;
         $response['user_type_id'] = $user_type_id;
-        $response['image_path'] =$image_path
+        $response['image_path'] =$image_path;
 
     } else {
         $response['status'] = "Email/Phone number and/or password is incorrect";
