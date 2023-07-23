@@ -9,11 +9,11 @@ $password = $_POST['password'];
 // Check if the input looks like a phone number
 if (preg_match('/^[0-9]+$/', $input)) {
     // input is a phone number
-    $query = $mysqli->prepare('SELECT id, email, password, first_name, last_name, user_type_id, image_path, phone_number FROM users WHERE phone_number=?');
+    $query = $mysqli->prepare('select id, email, password, first_name, last_name, user_type_id, image_path, phone_number from users where phone_number=?');
     $query->bind_param('s', $input);
 } else {
     // input is an email
-    $query = $mysqli->prepare('SELECT id, email, password, first_name, last_name, user_type_id, image_path, phone_number FROM users WHERE email=?');
+    $query = $mysqli->prepare('select id, email, password, first_name, last_name, user_type_id, image_path, phone_number from users where email=?');
     $query->bind_param('s', $input);
 }
 $query->execute();
