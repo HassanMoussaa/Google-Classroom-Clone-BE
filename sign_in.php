@@ -28,6 +28,7 @@ if ($num_rows == 0) {
     } else {
     if (password_verify($password, $hashed_password)) {
         $response['status'] = 'logged in';
+        $response['id']=$id;
         $response['first_name'] = $first_name;
         $response['last_name'] = $last_name;
         $response['user_type_id'] = $user_type_id;
