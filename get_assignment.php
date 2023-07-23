@@ -1,12 +1,12 @@
 <?php
     include('connection.php');
 
-    $class_id = $_GET['id'];
+    $assignment_id = $_GET['id'];
 
     $query = $mysqli->prepare('SELECT title, description, due_date ,due_time
     FROM assignments 
-    WHERE classroom_id=?');
-    $query->bind_param('i', $class_id);
+    WHERE id=?');
+    $query->bind_param('i', $assignment_id);
     $query->execute();
     $array = $query->get_result();
     $response = [];
@@ -16,6 +16,6 @@
 
    echo json_encode($response);
 
-//    API: GET_ASSIGNMENTS
-//    http://localhost/Google-Classroom-Clone-BE/get_assignments.php?id=1
+//    API: GET_ASSIGNMENT
+//    http://localhost/Google-Classroom-Clone-BE/get_assignment.php?id=1
 ?>
