@@ -40,6 +40,13 @@ if ($username_exists == 0 && $phone_exists == 0) {
 
     $response['status'] = "success";
     $response['message'] = "Added successfully";
+
+    if($user_type_id == 1){
+        $response['user_type'] = "student"; 
+    }
+    else{
+        $response['user_type'] = "teacher"; 
+    }
 } else {
     $response['status'] = "failed";
     $response['message'] = "Email or phone number already exist";

@@ -8,9 +8,9 @@
     WHERE id=?');
     $query->bind_param('i', $assignment_id);
     $query->execute();
-    $array = $query->get_result();
+    $result = $query->get_result();
     $response = [];
-    while($information = $array->fetch_assoc()){
+    while($information = $result->fetch_assoc()){
         $response[] = $information;
     }
 
