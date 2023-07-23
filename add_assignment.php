@@ -6,11 +6,11 @@ $response = array();
 $json_data = file_get_contents("php://input");
 $data = json_decode($json_data,true);
 
-$title = $data['title'];
-$description = $data['description'];
-$duedate = $data['duedate'];
-$duetime = $data['duetime'];
-$classroom_id = $data['classroom_id'];
+$title = $_POST['title'];
+$description = $_POST['description'];
+$duedate = $_POST['duedate'];
+$duetime = $_POST['duetime'];
+$classroom_id = $_POST['classroom_id'];
 
 $check_class = $mysqli->prepare('select * from classrooms where id=?');
 $check_class->bind_param('i', $classroom_id);

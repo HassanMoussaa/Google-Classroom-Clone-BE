@@ -6,13 +6,13 @@ $response = array();
 $json_data = file_get_contents("php://input");
 $data = json_decode($json_data,true);
 
-$email = $data['email'];
-$password = $data['password'];
-$first_name = $data['first_name'];
-$last_name = $data['last_name'];
-$phone_number = $data['phone_number'];
-$image_path = $data['image_path'];
-$user_type = $data['user_type'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$first_name = $_POST['first_name'];
+$last_name = $_POST['last_name'];
+$phone_number = $_POST['phone_number'];
+$image_path = $_POST['image_path'];
+$user_type = $_POST['user_type'];
 
 $check_username = $mysqli->prepare('select email from users where email=?');
 $check_username->bind_param('s', $email);
