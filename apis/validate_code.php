@@ -5,7 +5,7 @@ include('connection.php');
 
   $code = $_POST['code'];
 
-    $query = $mysqli->prepare('select user_id from password_reset where code = ? AND expiration_date >= NOW()');
+    $query = $mysqli->prepare('select user_id from password_resets where code = ? AND expiration_date >= NOW()');
     $query->bind_param('s', $code);
     $query->execute();
     $user_id = $query -> get_result();
