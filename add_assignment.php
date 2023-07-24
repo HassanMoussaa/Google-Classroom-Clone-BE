@@ -11,6 +11,7 @@ $description = $_POST['description'];
 $duedate = $_POST['duedate'];
 $duetime = $_POST['duetime'];
 $classroom_id = $_POST['classroom_id'];
+$current_time = date('Y-m-d H:i:s');
 
 $check_class = $mysqli->prepare('select * from classrooms where id=?');
 $check_class->bind_param('i', $classroom_id);
@@ -19,8 +20,8 @@ $check_class->store_result();
 $classroom_exists = $check_class->num_rows();
 
 if ($title != "" && $classroom_exists > 0){
-    $query = $mysqli->prepare('insert into assignments(title, description, due_date, due_time, classroom_id) values(?,?,?,?,?)');
-    $query->bind_param('ssssi', $title, $description, $duedate, $duetime, $classroom_id);
+    $query = $mysqli->prepare('insert into assignments(title, description, due_date, due_time, time, classroom_id) values(?,?,?,?,?,?)');
+    $query->bind_param('sssssi', $title, $description, $duedate, $duetime, $current_time, $classroom_id);
     $query->execute();
 
     $response['status'] = "success";
