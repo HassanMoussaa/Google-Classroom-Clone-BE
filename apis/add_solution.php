@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
 
     if ($assignment_exists > 0){
-        $query = $mysqli->prepare('insert into solutions(time, date, uploeded_file, assignment_id, user_id) values(?,?,?,?,?)');
+        $query = $mysqli->prepare('insert into solutions(time, date, uploeded_file, $file_name, assignment_id, user_id) values(?,?,?,?,?)');
         $query->bind_param('sssii', $current_time, $current_date, $target_directory, $assignment_id, $user_id);
         $query->execute();
     
