@@ -5,7 +5,7 @@ include('connection.php');
 $user_id = $_GET['user_id'];
 
 
-$query = $mysqli->prepare('select id,name,section,subject,room,
+$query = $mysqli->prepare('select id,name,section,subject,room
 from classrooms
 inner join enrollments ON classrooms.classroom_id = enrollments.classroom_id
 where enrollments.user_id = ?');
