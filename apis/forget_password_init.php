@@ -1,25 +1,27 @@
 <?php
 include('connection.php');
 
+$requestData = file_get_contents('php://input');
+echo "Received email: " . $requestData;
 
-if (isset($_POST['email'])) {
-// $_POST = json_decode(file_get_contents('php://input'), true);
+
+$_POST = json_decode(file_get_contents('php://input'), true);
 
 $email = $_POST['email'];
-$query = $mysqli->prepare('select id from users where email = ?');
+$query = $mysqli->prepare('SELECT id FROM users WHERE email = ?');
 $query->bind_param('s', $email);
 $query->execute();
 $query->store_result();
 
-
 if ($query->num_rows() > 0) {
-
+   $query->bind_result($user_id);
+    $query->fetch();
    $code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
 
    $expiration_date = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
 
-   $insert_query = $mysqli->prepare('insert into password_reset (user_id, code, expiration_date) VALUES (?, ?, ?)');
+   $insert_query = $mysqli->prepare('insert into password_resets (user_id, code, expiration_date) VALUES (?, ?, ?)');
    $insert_query->bind_param('iss', $user_id, $code, $expiration_date);
    $insert_query->execute();
 
@@ -49,9 +51,3 @@ if ($query->num_rows() > 0) {
 
  echo json_encode($response);
 
- } else {
-    // smail not provided in the request (this is used to deal with errors )
-    $response['status'] = 'error';
-    $response['message'] = 'Email not provided in the request.';
-    echo json_encode($response);
-}
