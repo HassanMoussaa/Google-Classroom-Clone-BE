@@ -2,13 +2,13 @@
 include('connection.php');
 // $_POST = json_decode(file_get_contents('php://input'), true);
 
-$user_id = $_GET['user_id'];
+$user_id = $_GET['id'];
 
 
-$query = $mysqli->prepare('select id,name,section,subject,room
-from classrooms
-inner join enrollments ON classrooms.classroom_id = enrollments.classroom_id
-where enrollments.user_id = ?');
+$query = $mysqli->prepare('SELECT classrooms.id, classrooms.name, classrooms.section, classrooms.subject, classrooms.room
+FROM classrooms
+INNER JOIN enrollments ON classrooms.id = enrollments.classroom_id
+WHERE enrollments.user_id = ?');
 
 
 $query->bind_param('i', $user_id);
