@@ -40,5 +40,4 @@ if (empty($classes)) {
 }
 
 
-
 echo json_encode($response);

@@ -5,15 +5,24 @@ include('connection.php');
 
   $code = $_POST['code'];
 
-   $query = $mysqli->prepare('select user_id from password_reset where code = ? AND expiration_date >= NOW()');
+    $query = $mysqli->prepare('select user_id from password_reset where code = ? AND expiration_date >= NOW()');
     $query->bind_param('s', $code);
     $query->execute();
     $user_id = $query -> get_result();
 
     if ($query->num_rows() > 0) {
+
+    $query2 = $mysqli->prepare('select password from users where id= ?');
+    $query2->bind_param('i', $user_id);
+    $query2->execute();
+    
+    if ($query2->num_rows() > 0) {
+    $password = $query2 -> get_result();
     $response['status'] = 'success';
     $response['message'] = 'code is valid and not expired.';
-    $response['user_id']=$user_id
+    $response['password']=$password;
+    $response['user_id']=$user_id;
+    }
 
 } else {
     $response['status'] = 'error';
