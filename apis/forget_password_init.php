@@ -42,6 +42,9 @@ if ($query->num_rows() > 0) {
         $response['status'] = 'error';
         $response['message'] = 'Failed to send password reset token. Please try again .';
  }
+}else {
+    $response['status'] = "error";
+    $response['message'] = "no such email";
 }
 
  echo json_encode($response);
