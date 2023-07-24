@@ -19,9 +19,8 @@
         $response[] = $information;
     }
 
-    echo "dffdaas";
     echo json_encode($response);
 
 //    API: GET_SOLUTION
-//    http://localhost/Google-Classroom-Clone-BE/get_solutions.php?id=
+//    http://localhost/googleclone/Google-Classroom-Clone-BE/apis/get_solution.php?user_id=&assignment_id=
 ?>
