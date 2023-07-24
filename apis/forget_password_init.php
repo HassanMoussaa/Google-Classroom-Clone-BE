@@ -28,21 +28,21 @@ if ($query->num_rows() > 0) {
         // for email sending    
         $to = $email;
         $subject = 'Password Reset Token';
-        $message = 'Your password reset token is: ' . $code;
-        $headers = 'From: noreply@yourdomain.com' . "\r\n" .
-           'Reply-To: noreply@yourdomain.com' . "\r\n" ;
-           
+        $message = 'Your password reset code is: ' . $code;
+        $headers = "MIME-Version:1.0" . "\r\n" ;
+        $headers .= "Cotent-type:text/html;charset=UTF-8" . "\r\n" ;
+        $headers .= 'From: <classroomgrp10@gmail.com>' . "\r\n" ; 
 
 
 
     if (mail($to, $subject, $message, $headers)) {
         // email sent successfully
         $response['status'] = 'success';
-        $response['message'] = 'Password reset token sent to your email.';
+        $response['message'] = 'Password reset code sent to your email.';
     } else {
         // email sending failed
         $response['status'] = 'error';
-        $response['message'] = 'Failed to send password reset token. Please try again .';
+        $response['message'] = 'Failed to send password reset code. Please try again .';
  }
 }else {
     $response['status'] = "error";
