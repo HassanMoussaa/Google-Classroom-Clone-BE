@@ -28,10 +28,10 @@ $phone_exists = $check_phone->num_rows();
 
 if ($username_exists == 0 && $phone_exists == 0) {
     if($user_type == "student"){
-        $user_type_id = 1;
+        $user_type_id = 2;
     }
     else{
-        $user_type_id = 2;
+        $user_type_id = 1;
     }
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     $query = $mysqli->prepare('insert into users(email, password, first_name, last_name, phone_number, image_path, user_type_id) values(?,?,?,?,?,?,?)');
@@ -41,7 +41,7 @@ if ($username_exists == 0 && $phone_exists == 0) {
     $response['status'] = "success";
     $response['message'] = "Added successfully";
 
-    if($user_type_id == 1){
+    if($user_type_id == 2){
         $response['user_type'] = "student"; 
     }
     else{
