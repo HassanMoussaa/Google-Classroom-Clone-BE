@@ -13,7 +13,7 @@
     $response = [];
 
     $query2 = $mysqli->prepare('SELECT COUNT(user_id)
-    FROM enrollments 
+    FROM enrollments
     WHERE classroom_id=?');
     $query2->bind_param('i', $class_id);
     $query2->execute();
