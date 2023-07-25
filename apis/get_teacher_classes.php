@@ -3,7 +3,7 @@
 
     $user_id = $_GET['id'];
 
-    $query = $mysqli->prepare('SELECT name, section, subject, room, user_id
+    $query = $mysqli->prepare('SELECT id, name, section, subject, room, user_id
     FROM classrooms 
     WHERE user_id=?');
     $query->bind_param('i', $user_id);
