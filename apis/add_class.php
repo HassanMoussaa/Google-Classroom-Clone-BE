@@ -6,11 +6,11 @@ $response = array();
 $json_data = file_get_contents("php://input");
 $data = json_decode($json_data,true);
 
-$name = $_POST['name'];
-$section = $_POST['section'];
-$subject = $_POST['subject'];
-$room = $_POST['room'];
-$user_id = $_POST['user_id'];
+$name = $data['name'];
+$section = $data['section'];
+$subject = $data['subject'];
+$room = $data['room'];
+$user_id = $data['user_id'];
 
 $check_user = $mysqli->prepare('select * from users where id=?');
 $check_user->bind_param('i', $user_id);
