@@ -11,14 +11,15 @@
     $query->execute();
     $array = $query->get_result();
     $response = [];
-
-    $query2 = $mysqli->prepare('SELECT COUNT(user_id)
+    
+    $query2 = $mysqli->prepare('SELECT COUNT(id)
     FROM enrollments
     WHERE classroom_id=?');
     $query2->bind_param('i', $class_id);
     $query2->execute();
-    $query2->store_result();
     $query2->bind_result($student_count);
+    $query2->fetch();
+    echo $student_count;
 
     $response['student_count'] = $student_count;
 
