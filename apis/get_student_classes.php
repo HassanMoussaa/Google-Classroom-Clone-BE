@@ -3,7 +3,7 @@
 
     $user_id = $_GET['id'];
 
-    $query = $mysqli->prepare('SELECT cl.name, cl.section, cl.subject, cl.room, u.first_name, u.last_name
+    $query = $mysqli->prepare('SELECT cl.id cl.name, cl.section, cl.subject, cl.room, u.first_name, u.last_name
     FROM enrollments en
     JOIN classrooms cl ON en.classroom_id = cl.id
     JOIN users u ON en.user_id = u.id
